@@ -4,7 +4,7 @@ import Paper from '@mui/material/Paper';
 interface DefaultImgInterface {
     url: string
     alt: string
-    handler(): void
+    handler(url: string): void
 }
 
 export function DefaultImg(props: DefaultImgInterface){
@@ -16,12 +16,17 @@ export function DefaultImg(props: DefaultImgInterface){
         overflow: "hidden",
     }
     return(
-        <Paper onClick={props.handler} sx={defaultImgsStyle}>
+        <Paper sx={defaultImgsStyle} >
             <img style={{
                 height: "100%",
                 width: "auto",
                 objectFit: "cover",
-            }} id={props.alt} alt={props.alt} src={props.url}/>
+            }}
+                 id={props.alt}
+                 alt={props.alt}
+                 src={props.url}
+                 onClick={()=>{props.handler(props.url)}}
+                 />
         </Paper>
     )
 }

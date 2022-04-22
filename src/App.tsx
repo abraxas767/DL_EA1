@@ -11,6 +11,8 @@ import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import CircularProgress from '@mui/material/CircularProgress';
+import DialogTitle from '@mui/material/DialogTitle';
+import Dialog from '@mui/material/Dialog';
 
 // COMPONENTS
 import { DefaultImg } from './components/DefaultImg';
@@ -36,7 +38,14 @@ function App() {
   const [ previewURL, setPreviewURL ] = useState(Faultier);
   // HOLDS IMAGE REFERENCE
   const toClassify = useRef(null);
-
+  // HOLDS RESULT
+  const [ result, setResult ] = useState([
+    {label: "null", confidence: 0},
+    {label: "null", confidence: 0},
+    {label: "null", confidence: 0},
+  ]);
+  // OPENS RESULT DIALOG
+  const [ resultOpen, setResultOpen ] = useState(false);
 
 
   /*
@@ -83,6 +92,8 @@ function App() {
     // PREDICT preview image
     classifier.classify((toClassify.current), function(err: any, results:any){
       setIsClassifying(false);
+      setResult(results);
+      setResultOpen(true);
       console.log(results);});
   }
 
@@ -135,9 +146,10 @@ function App() {
       content = (
         <div style={{width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center"}}>
             <Box sx={{
-              width: "300px",
+              maxWidth: "300px",
               opacity: "0.4",
-              position: "absolute"
+              position: "absolute",
+              display: "flex",
             }}>
               <img ref={toClassify} width="100%" src={previewURL} alt="Faultier"/>
             </Box>
@@ -165,8 +177,9 @@ function App() {
 
   }
 
-  function onDefaultImgHandler(){
-    console.log("hello world");
+  function onDefaultImgHandler(url: string){
+    setPreviewURL(url);
+    classifyImg();
   }
 
 
@@ -199,23 +212,34 @@ function App() {
           <DefaultImg handler={onDefaultImgHandler} alt="Fish" url={Fish}/>
         </Container>
 
+
         <Paper>
-         <Plot
-           data={[
-             {
-                x: [1, 2, 3],
-                y: [2, 6, 3],
-                type: 'scatter',
-                mode: 'lines+markers',
-                marker: {color: 'red'},
-              },
-              {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
-            ]}
-            layout={ {width: 320, height: 240, title: 'A Fancy Plot'} }
-          />
         </Paper>
 
       </Container>
+      <Dialog
+        open={resultOpen}
+        onClose={() => setResultOpen(false)}
+        fullWidth
+        maxWidth="lg"
+        sx={{display: "flex", justifyContent: "center"}}
+      >
+        <DialogTitle sx={{fontSize: "35px"}}>{result[0].label}</DialogTitle>
+        <div style={{display: "flex"}}>
+          <Box sx={{margin: "30px", display: "flex", justifyContent: "center", alignItems:"center"}}>
+            <img ref={toClassify} style={{maxWidth: "400px"}} src={previewURL} alt="Faultier"/>
+          </Box>
+
+          <Box sx={{margin: "30px"}}>
+          <Plot
+            data={[
+                {type: 'bar', x: [1, 2, 3], y: [result[0].confidence, result[1].confidence, result[2].confidence]},
+              ]}
+              layout={ {width: 520, height: 440, title: 'Results:'} }
+            />
+          </Box>
+        </div>
+      </Dialog>
     </ThemeProvider>
   );
 }
