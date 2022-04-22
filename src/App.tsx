@@ -23,6 +23,15 @@ import Faultier from './img/Faultier.jpeg';
 import Fussball from './img/Fussball.jpeg';
 import Telephone from './img/Telephone.jpeg';
 import Fish from './img/fish.jpeg';
+import Ente from './img/Ente.jpeg';
+import Katze from './img/katze.jpeg';
+
+import Mountain from './img/Mountain.jpeg';
+import Native from './img/Native.jpeg';
+import Rocket from './img/Rocket.jpeg';
+import Tree from './img/Tree.jpeg';
+import Crowd from './img/Crowd.jpeg';
+import Hand from './img/Hand.jpeg';
 
 function App() {
 
@@ -108,7 +117,7 @@ function App() {
 
   const style = {
     background: theme.palette.secondary.main,
-    height: "250px",
+    height: "350px",
     width: "95%",
     display: "flex",
     justifyContent: "center",
@@ -194,7 +203,7 @@ function App() {
       </Container>
       <Container>
         <Paper elevation={3} sx={{
-          height: "300px",
+          height: "400px",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -210,8 +219,18 @@ function App() {
           <DefaultImg handler={onDefaultImgHandler} alt="Fussball" url={Fussball}/>
           <DefaultImg handler={onDefaultImgHandler} alt="Telephone" url={Telephone}/>
           <DefaultImg handler={onDefaultImgHandler} alt="Fish" url={Fish}/>
+          <DefaultImg handler={onDefaultImgHandler} alt="Ente" url={Ente}/>
+          <DefaultImg handler={onDefaultImgHandler} alt="Katze" url={Katze}/>
         </Container>
 
+        <Container sx={{display: "flex",justifyContent: "center"}}>
+          <DefaultImg handler={onDefaultImgHandler} alt="Rocket" url={Rocket}/>
+          <DefaultImg handler={onDefaultImgHandler} alt="Tree" url={Tree}/>
+          <DefaultImg handler={onDefaultImgHandler} alt="Native" url={Native}/>
+          <DefaultImg handler={onDefaultImgHandler} alt="Crowd" url={Crowd}/>
+          <DefaultImg handler={onDefaultImgHandler} alt="Mountain" url={Mountain}/>
+          <DefaultImg handler={onDefaultImgHandler} alt="Hand" url={Hand}/>
+        </Container>
 
         <Paper>
         </Paper>
@@ -224,7 +243,9 @@ function App() {
         maxWidth="lg"
         sx={{display: "flex", justifyContent: "center"}}
       >
-        <DialogTitle sx={{fontSize: "35px"}}>{result[0].label}</DialogTitle>
+        <DialogTitle sx={{fontSize: "35px", color: "6600ff"}}>{result[0].label}</DialogTitle>
+        <p style={{margin: "0 0 0 30px", padding: "0", color: "#944dff"}}>{result[1].label}</p>
+        <p style={{margin: "5px 0 0 30px", padding: "0", color: "#d1b3ff"}}>{result[2].label}</p>
         <div style={{display: "flex"}}>
           <Box sx={{margin: "30px", display: "flex", justifyContent: "center", alignItems:"center"}}>
             <img ref={toClassify} style={{maxWidth: "400px"}} src={previewURL} alt="Faultier"/>
@@ -233,9 +254,25 @@ function App() {
           <Box sx={{margin: "30px"}}>
           <Plot
             data={[
-                {type: 'bar', x: [1, 2, 3], y: [result[0].confidence, result[1].confidence, result[2].confidence]},
+
+                {
+                  type: 'bar',
+                  x: [result[0].label, result[1].label, result[2].label],
+                  y: [result[0].confidence, result[1].confidence, result[2].confidence],
+                  marker: {
+                    color: [
+                      '#6600ff',
+                      '#944dff',
+                      '#d1b3ff',
+                    ]
+                  },
+                },
               ]}
-              layout={ {width: 520, height: 440, title: 'Results:'} }
+              layout={ {
+                width: 520,
+                height: 440,
+                title: 'Confidence from 0 to 1:',
+              } }
             />
           </Box>
         </div>
