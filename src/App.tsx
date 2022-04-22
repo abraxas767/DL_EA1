@@ -132,7 +132,7 @@ function App() {
 
   if(!modelLoaded){
     return (
-      <Container sx={{
+      <div style={{
         zIndex:"55",
         width: "100%",
         height:"100%",
@@ -145,7 +145,7 @@ function App() {
       }}>
           <span style={{color: theme.palette.primary.main, marginBottom: "20px"}}>Loading Model</span>
           <CircularProgress color="success"/>
-      </Container>
+      </div>
     );
   } else {
 
