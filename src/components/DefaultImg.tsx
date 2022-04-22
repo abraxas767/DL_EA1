@@ -14,6 +14,10 @@ export function DefaultImg(props: DefaultImgInterface){
         margin: "5px",
         cursor: "pointer",
         overflow: "hidden",
+        opacity: "1",
+        "&:hover": {
+            opacity: "0.5",
+        },
     }
     return(
         <Paper sx={defaultImgsStyle} >

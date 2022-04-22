@@ -7,12 +7,14 @@ import Plot from 'react-plotly.js';
 // MUI
 import { theme } from './theme';
 import { ThemeProvider } from '@mui/material/styles';
+import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import CircularProgress from '@mui/material/CircularProgress';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
 
 // COMPONENTS
 import { DefaultImg } from './components/DefaultImg';
@@ -124,7 +126,7 @@ function App() {
     alignItems: "center",
     cursor: "pointer",
     border: "1px dashed red",
-    borderColor: theme.palette.success.main,
+    borderColor: theme.palette.primary.main,
   };
 
 
@@ -198,8 +200,14 @@ function App() {
         height: "100px",
         display: "flex",
         justifyContent: "center",
+        fontFamily: "Helvetica",
+        fontWeight: "400",
       }}>
-        <h1>ML5 Image Classifier</h1>
+        <div>
+          <h1>ML5 Image Classifier</h1>
+          <hr />
+        </div>
+
       </Container>
       <Container>
         <Paper elevation={3} sx={{
@@ -276,6 +284,10 @@ function App() {
             />
           </Box>
         </div>
+
+        <DialogActions>
+          <Button onClick={()=>setResultOpen(false)}>Close</Button>
+        </DialogActions>
       </Dialog>
     </ThemeProvider>
   );
