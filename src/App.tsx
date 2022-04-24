@@ -1,10 +1,16 @@
 import React from 'react';
+import MainContainer from './container/MainContainer';
 import DocContainer from './container/DocContainer';
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return(
-    <DocContainer />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/ml5" element={<MainContainer />}/>
+        <Route path="/doc" element={<DocContainer />}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
