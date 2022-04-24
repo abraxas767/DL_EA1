@@ -13,6 +13,7 @@ import Rocket from '../img/Rocket.jpeg';
 import Tree from '../img/Tree.jpeg';
 import Crowd from '../img/Crowd.jpeg';
 import Hand from '../img/Hand.jpeg';
+import JellyFish from '../img/jellyfish.jpg'
 
 export function ImageRows(props: any){
 
@@ -31,7 +32,7 @@ export function ImageRows(props: any){
           <DefaultImg handler={props.handler} alt="Rocket" url={Rocket}/>
           <DefaultImg handler={props.handler} alt="Tree" url={Tree}/>
           <DefaultImg handler={props.handler} alt="Native" url={Native}/>
-          <DefaultImg handler={props.handler} alt="Crowd" url={Crowd}/>
+          <DefaultImg handler={props.handler} alt="Jellyfish" url={JellyFish}/>
           <DefaultImg handler={props.handler} alt="Mountain" url={Mountain}/>
           <DefaultImg handler={props.handler} alt="Hand" url={Hand}/>
         </Container>

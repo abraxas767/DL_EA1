@@ -32,6 +32,7 @@ function MainContainer(){
   const toClassify = useRef(null);
   // HOLDS RESULT
   const [ result, setResult ] = useState([
+    // default results
     {label: "null", confidence: 0},
     {label: "null", confidence: 0},
     {label: "null", confidence: 0},

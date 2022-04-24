@@ -7,7 +7,9 @@ function App() {
   return(
     <BrowserRouter>
       <Routes>
+        {/* MAIN ML5 - APPLICATION */}
         <Route path="/ml5" element={<MainContainer />}/>
+        {/* DOCUMENTATION */}
         <Route path="/doc" element={<DocContainer />}/>
       </Routes>
     </BrowserRouter>
