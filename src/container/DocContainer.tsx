@@ -242,6 +242,23 @@ function DocContainer() {
                     warten. Obwohl das Bild auch viel schneller von ml5 klassifiziert wird habe ich mich
                     entschieden als Mindestwartezeit 300ms einzustellen. Dies soll dem Nutzer als
                     Feedback dienen.
+                    Das Ergebnis der Klassifizierung wird in einem MaterialUI-Dialog angezeigt. Der Graph der
+                    über die Wahrscheinlichkeit Auskunft gibt wird mit Hilfe von Plotly gerendert.
+                </p>
+                <h3>Fazit</h3>
+                <p>
+                    Insgesamt hat mir das Projekt sehr viel Spaß gemacht und ich konnte viele neue
+                    Libraries entdecken.
+
+                    Danke für die Aufmerksamkeit,
+
+
+
+                    Danke für die Aufmerksamkeit,
+
+
+                    Christoph Kaiser
+                    Christoph Kaiser
                 </p>
             </Container>
         </>
