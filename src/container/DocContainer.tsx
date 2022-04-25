@@ -66,6 +66,25 @@ function DocContainer() {
         }`
     );
 
+    const classifyImg = (
+        `// CLASSIFY THE IMAGE
+        function classifyImg(): void{
+            // only run if model is loaded and classifier is available
+            if(classifier === null || modelLoaded === false){return;}
+            setIsClassifying(true);
+            // Wait recursively for preview image to get set
+            if(toClassify.current == null){
+                setTimeout(classifyImg, 300);
+                return;
+            }
+            // PREDICT preview image
+            classifier.classify((toClassify.current), function(err: any, results:any){
+            setIsClassifying(false);
+            setResult(results);
+            setResultOpen(true);});
+        }`
+    );
+
     return (
         <>
             <div style={{position: "absolute", padding: "30px"}}>
@@ -204,6 +223,26 @@ function DocContainer() {
                         showLineNumbers={false}
                     />
                 </Paper>
+                <p>
+                    Sobald das Model dann fertig geladen ist können Bilder klassifiziert werden.
+                    Dafür hier die classifyImg() - Methode:
+                </p>
+                <Paper sx={{padding: "10px"}}>
+                    <CodeBlock
+                        text={classifyImg}
+                        language="jsx"
+                        showLineNumbers={false}
+                    />
+                </Paper>
+                <p>
+                    Die classify-Methode von ML5 akzeptiert ein HTML-Image-Element. Dieses
+                    wird als Preview mit einem Loading-Overlay gerendert, sobald der Nutzer ein
+                    Bild hochläd. Zur gleichen Zeit wird die classifyImg() - Methode aufgerufen.
+                    Da das Bild nicht schnell genug gerendert wird muss die classifyImg-Methode darauf
+                    warten. Obwohl das Bild auch viel schneller von ml5 klassifiziert wird habe ich mich
+                    entschieden als Mindestwartezeit 300ms einzustellen. Dies soll dem Nutzer als
+                    Feedback dienen.
+                </p>
             </Container>
         </>
     );

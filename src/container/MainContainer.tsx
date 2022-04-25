@@ -86,7 +86,7 @@ function MainContainer(){
     setIsClassifying(true);
     // Wait recursively for preview image to get set
     if(toClassify.current == null){
-      setTimeout(classifyImg, 1000);
+      setTimeout(classifyImg, 300);
       return;
     }
     // PREDICT preview image
