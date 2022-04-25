@@ -1,8 +1,12 @@
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import { CodeBlock } from "react-code-blocks";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useNavigate } from "react-router-dom";
 
 function DocContainer() {
+
+    const navigate = useNavigate();
 
     const routing = (
     `<BrowserRouter>
@@ -44,8 +48,30 @@ function DocContainer() {
     {label: "null", confidence: 0},
   ]);`);
 
+    const ml5Loading = (
+        `/*
+            Check if the classifier is still null.
+            If so, initialize ML5 Image Classifier
+        */
+        if(classifier === null){
+            console.log("initializing ml5 image classifier");
+            ml5.imageClassifier('MobileNet').then((res: any)=>{
+            // This will run after the page is rendered.
+            // res will be saved in state but is only available
+            // in useEffect-hook (which runs after render)
+            setClassifier(res);
+            console.log("classifier saved in state, available in next render");
+            // catch errors
+            }).catch((err: any) => console.log(err));
+        }`
+    );
+
     return (
         <>
+            <div style={{position: "absolute", padding: "30px"}}>
+
+                <ArrowBackIcon onClick={()=>navigate("/ml5")} style={{cursor: "pointer"}}/>
+            </div>
             <Container sx={{padding: "30px"}}>
                 <h1>ML5-Bildklassifizierung - Dokumentation</h1>
                 <p><i>Von Christoph Kaiser - Matrikelnmr: 346117</i></p>
@@ -155,6 +181,14 @@ function DocContainer() {
                 <Paper sx={{padding: "10px"}}>
                     <CodeBlock
                         text={ml5_2}
+                        language="jsx"
+                        showLineNumbers={false}
+                    />
+                </Paper>
+                <p>Beim ersten Aufruf wird der ml5-Classifier geladen. Dies kann eine Weile dauern:</p>
+                <Paper sx={{padding: "10px"}}>
+                    <CodeBlock
+                        text={ml5Loading}
                         language="jsx"
                         showLineNumbers={false}
                     />

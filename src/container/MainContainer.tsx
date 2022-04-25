@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import Box from '@mui/material/Box';
+import { Outlet, Link } from "react-router-dom";
 
 // MUI
 import { theme } from '../theme';
@@ -201,6 +202,10 @@ function MainContainer(){
             previewURL={previewURL}
         />
         {/* ------------------------------ */}
+
+        <div style={{position: "absolute", paddingLeft: "30px", fontSize:"20px" }}>
+          <Link style={{textDecoration: "none"}} to="/doc">Documentation</Link>
+        </div>
 
     </ThemeProvider>
   );
